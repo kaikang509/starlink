@@ -1,0 +1,37 @@
+var deviceSettings = {
+    isAndroid: null,
+    isEarlyIE: null,
+    isIE: null,
+    isIEMobile: null,
+    isiPod: null,
+    isiPhone: null,
+    isiPad: null,
+    isiOS: null,
+    isMac: null,
+    isMobile: null,
+    isDesktop: null
+};
+
+
+(function() {
+    var ua = navigator.userAgent.toLowerCase();
+
+    deviceSettings.isAndroid = ua.indexOf("android") > -1;
+    deviceSettings.isMac = navigator.userAgent.match(/Mac/i) !== null;
+    deviceSettings.isiPod = navigator.userAgent.match(/iPod/i) !== null;
+    deviceSettings.isiPhone = navigator.userAgent.match(/iPhone/i) !== null;
+    deviceSettings.isiPad = navigator.userAgent.match(/iPad/i) !== null;
+    deviceSettings.isiOS = (navigator.userAgent.match(/(iPad|iPhone|iPod)/i) ? true : false);
+    deviceSettings.isIEMobile = navigator.userAgent.match(/iemobile/i) !== null;
+
+    var p = navigator.platform.toLowerCase();
+
+    //determine if this is a mobile browser:
+    if (deviceSettings.isIEMobile || deviceSettings.isAndroid || deviceSettings.isiPad || p === 'ipad' || p === 'iphone' || p === 'ipod' || p === 'android' || p === 'palm' || p === 'windows phone' || p === 'blackberry' || p === 'linux armv7l') {
+		deviceSettings.isMobile = true;
+        document.body.className += 'isMobile';
+    } else {
+		deviceSettings.isDesktop = true;
+		document.body.className += 'isDesktop';
+	}
+})();
